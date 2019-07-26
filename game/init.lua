@@ -11,7 +11,7 @@ end
 
 function game.update(dt)
     for i, v in ipairs(game.ink) do
-        v.life = v.life + dt * 0.85
+        v.life = v.life + dt * 5
     end
 
     game.squid:update(dt)
@@ -22,7 +22,7 @@ function game.draw()
 
     for i, v in ipairs(game.ink) do
         love.graphics.setColor(0, 0, 0, 1 / v.life)
-        love.graphics.circle('fill', v.x, v.y, v.life * 50)
+        love.graphics.circle('fill', v.x, v.y, v.life * 25)
     end
 
     love.graphics.setColor(1, 0, 0)
