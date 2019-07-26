@@ -1,5 +1,9 @@
 local game = require 'game/'
 
+function math.lerp(a, b, t)
+    return a + (b - a) * t
+end
+
 function love.load()
     game.load()
 end
