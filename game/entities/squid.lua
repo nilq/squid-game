@@ -20,6 +20,8 @@ function make(x, y)
         if love.mouse.isDown(1) and dist > 15 then
             local target_angle = math.atan2(mouse_y - self.y, mouse_x - self.x)
 
+            print(math.cos(target_angle) * self.speed * dt, math.sin(target_angle) * self.speed * dt)
+
             self.dx = self.dx + math.cos(target_angle) * self.speed * dt
             self.dy = self.dy + math.sin(target_angle) * self.speed * dt
         end
