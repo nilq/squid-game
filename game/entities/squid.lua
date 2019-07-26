@@ -38,6 +38,11 @@ function make(x, y)
         love.graphics.circle('fill', self.x, self.y, 15)
     end
 
+    function squid:press(key)
+        print("ey")
+        table.insert(game.ink, { x = self.x, y = self.y, life = 0 })
+    end
+
     return squid
 end
 
