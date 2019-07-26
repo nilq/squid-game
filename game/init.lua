@@ -1,5 +1,7 @@
 local game = {}
 
+love.graphics.setBackgroundColor(0, 0.85, 0.85)
+
 function game.load()
     entities = require 'game/entities'
     game.squid = entities.squid.make(100, 100)
