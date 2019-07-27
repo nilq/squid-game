@@ -7,28 +7,16 @@ function make(x, y)
         dy = 0,
 
         angle = 0,
-        speed = 4500,
-        friction = 4.9,
+        
+        acceleration = 4500,
+        friction = 5,
+
+        mouse_break_distance = 40,
+        breaking_friction = 20
     }
 
     function squid:update(dt)
-        local mouse_x = love.mouse.getX()
-        local mouse_y = love.mouse.getY()
-
-        local dist = math.sqrt((self.x - mouse_x)^2 + (self.y - mouse_y)^2)
-
-        if love.mouse.isDown(1) and dist > 15 then
-            local target_angle = math.atan2(mouse_y - self.y, mouse_x - self.x)
-
-            self.dx = self.dx + math.cos(target_angle) * self.speed * dt
-            self.dy = self.dy + math.sin(target_angle) * self.speed * dt
-        end
-
-        self.dx = math.lerp(self.dx, 0, self.friction * dt)
-        self.dy = math.lerp(self.dy, 0, self.friction * dt)
-
-        self.x = self.x + self.dx * dt
-        self.y = self.y + self.dy * dt
+        self:movement_type_a(dt)
     end
 
     function squid:draw()
@@ -41,6 +29,32 @@ function make(x, y)
             local ink = require 'game/entities/ink'
             table.insert(game.objects, ink.make(self.x, self.y))
         end
+    end
+
+    function squid:movement_type_a(dt)
+        local mouse_x = love.mouse.getX()
+        local mouse_y = love.mouse.getY()
+
+        local dist = math.distance(self.x, self.y, mouse_x, mouse_y)
+
+        local friction = self.friction
+
+        if love.mouse.isDown(1) then
+            local target_angle = math.atan2(mouse_y - self.y, mouse_x - self.x)
+
+            if dist > self.mouse_break_distance then
+                self.dx = self.dx + math.cos(target_angle) * self.acceleration * dt
+                self.dy = self.dy + math.sin(target_angle) * self.acceleration * dt
+            else
+                friction = self.breaking_friction
+            end
+        end
+
+        self.dx = math.lerp(self.dx, 0, friction * dt)
+        self.dy = math.lerp(self.dy, 0, friction * dt)
+
+        self.x = self.x + self.dx * dt
+        self.y = self.y + self.dy * dt
     end
 
     return squid
