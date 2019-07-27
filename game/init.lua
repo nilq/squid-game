@@ -1,5 +1,6 @@
 game = {
-    objects = {}
+    objects = {},
+    ink = {},
 }
 
 love.graphics.setBackgroundColor(0, 0.85, 0.85)
@@ -12,6 +13,12 @@ end
 function game.update(dt)
     game.squid:update(dt)
 
+    for i, v in ipairs(game.ink) do
+        if v.update then
+            v:update(i, dt)
+        end
+    end
+
     for i, v in ipairs(game.objects) do
         if v.update then
             v:update(i, dt)
@@ -23,6 +30,12 @@ function game.draw()
     game.squid:draw()
 
     for i, v in ipairs(game.objects) do
+        if v.draw then
+            v:draw()
+        end
+    end
+
+    for i, v in ipairs(game.ink) do
         if v.draw then
             v:draw()
         end

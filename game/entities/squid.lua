@@ -28,12 +28,14 @@ function make(x, y)
     function squid:press(key)
         if key == "space" then
             local ink = require 'game/entities/ink'
-            table.insert(game.objects, ink.make(self.x, self.y))
+            table.insert(game.ink, ink.make(self.x, self.y))
         end
 
         if key == "e" then
-            local enemy = require 'game/entities/enemy'
-            table.insert(game.objects, enemy.make('normal', self.x, self.y))
+            local enemy = (require 'game/entities/').enemy
+            local e = enemy.make('normal', self.x, self.y)
+
+            table.insert(game.objects, e)
         end
     end
 

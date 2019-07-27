@@ -3,7 +3,7 @@ function make(x, y)
         x = x,
         y = y,
         size = 0.5,
-        scale = 1.5,
+        scale = 1.5 * 20,
         life = 0,
         weed_mode = false,
         fade = 1,
@@ -20,7 +20,7 @@ function make(x, y)
             self.size = self.size + dt * self.scale
         else
             self.a = self.a + dt * self.pulse_speed
-            self.pulse = math.sin(self.a)
+            self.pulse = math.sin(self.a) * 5
             self.fade = self.fade + dt * 20
         end
 
@@ -28,7 +28,7 @@ function make(x, y)
             self.fade = self.fade + dt * 65
 
             if self.fade > 255 then
-                table.remove(game.objects, i)
+                table.remove(game.ink, i)
             end
         end
     end
@@ -39,7 +39,7 @@ function make(x, y)
         else
             love.graphics.setColor(math.random(0, 255) / 255, math.random(0, 255) / 255, math.random(0, 255) / 255, 1 / self.fade)
         end
-        love.graphics.circle('fill', self.x, self.y, self.size * 20 + self.pulse * 5)
+        love.graphics.circle('fill', self.x, self.y, self.size + self.pulse)
     end
 
     return ink
