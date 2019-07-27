@@ -21,10 +21,11 @@ function make(x, y)
         else
             self.a = self.a + dt * self.pulse_speed
             self.pulse = math.sin(self.a)
+            self.fade = self.fade + dt * 20
         end
 
         if self.life > self.death then
-            self.fade = self.fade + dt * 80
+            self.fade = self.fade + dt * 65
 
             if self.fade > 255 then
                 table.remove(game.objects, i)
