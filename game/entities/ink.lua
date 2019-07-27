@@ -9,6 +9,7 @@ function make(x, y)
         fade = 1,
         death = 1.75,
         pulse = 0,
+        pulse_speed = 7,
         a = 0,
     }
 
@@ -18,18 +19,22 @@ function make(x, y)
         if self.life < self.death / 1.5 then
             self.size = self.size + dt * self.scale
         else
-            self.a = self.a + dt * 5
+            self.a = self.a + dt * self.pulse_speed
             self.pulse = math.sin(self.a)
         end
 
         if self.life > self.death then
-            table.remove(game.objects, i)
+            self.fade = self.fade + dt * 80
+
+            if self.fade > 255 then
+                table.remove(game.objects, i)
+            end
         end
     end
 
     function ink:draw()
         if not self.weed_mode then
-            love.graphics.setColor(0, 0, 0)
+            love.graphics.setColor(0, 0, 0, 1 / self.fade)
         else
             love.graphics.setColor(math.random(0, 255) / 255, math.random(0, 255) / 255, math.random(0, 255) / 255)
         end
