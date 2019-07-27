@@ -38,7 +38,8 @@ function make(x, y)
 
     function squid:press(key)
         if key == "space" then
-            table.insert(game.ink, { x = self.x, y = self.y, life = 0 })
+            local ink = require 'game/entities/ink'
+            table.insert(game.objects, ink.make(self.x, self.y))
         end
     end
 

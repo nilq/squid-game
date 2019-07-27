@@ -1,5 +1,5 @@
 game = {
-    ink = {}
+    objects = {}
 }
 
 love.graphics.setBackgroundColor(0, 0.85, 0.85)
@@ -10,23 +10,22 @@ function game.load()
 end
 
 function game.update(dt)
-    for i, v in ipairs(game.ink) do
-        v.life = v.life + dt * 3.5
+    game.squid:update(dt)
 
-        if v.life > 5 then
-            table.remove(game.ink, i)
+    for i, v in ipairs(game.objects) do
+        if v.update then
+            v:update(i, dt)
         end
     end
-
-    game.squid:update(dt)
 end
 
 function game.draw()
     game.squid:draw()
 
-    for i, v in ipairs(game.ink) do
-        love.graphics.setColor(0, 0, 0, 1 / v.life)
-        love.graphics.circle('fill', v.x, v.y, v.life * 25)
+    for i, v in ipairs(game.objects) do
+        if v.draw then
+            v:draw()
+        end
     end
 
     love.graphics.setColor(1, 0, 0)
