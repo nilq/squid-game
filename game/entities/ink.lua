@@ -5,7 +5,7 @@ function make(x, y)
         size = 0.5,
         scale = 1.5,
         life = 0,
-        weed_mode = true,
+        weed_mode = false,
         fade = 1,
         death = 1.75,
         pulse = 0,

@@ -29,6 +29,11 @@ function make(x, y)
             local ink = require 'game/entities/ink'
             table.insert(game.objects, ink.make(self.x, self.y))
         end
+
+        if key == "e" then
+            local enemy = require 'game/entities/enemy'
+            table.insert(game.objects, enemy.make('normal', self.x, self.y))
+        end
     end
 
     function squid:movement_type_a(dt)
