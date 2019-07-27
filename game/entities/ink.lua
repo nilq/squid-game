@@ -5,7 +5,7 @@ function make(x, y)
         size = 0.5,
         scale = 1.5,
         life = 0,
-        weed_mode = false,
+        weed_mode = true,
         fade = 1,
         death = 1.75,
         pulse = 0,
@@ -37,7 +37,7 @@ function make(x, y)
         if not self.weed_mode then
             love.graphics.setColor(0, 0, 0, 1 / self.fade)
         else
-            love.graphics.setColor(math.random(0, 255) / 255, math.random(0, 255) / 255, math.random(0, 255) / 255)
+            love.graphics.setColor(math.random(0, 255) / 255, math.random(0, 255) / 255, math.random(0, 255) / 255, 1 / self.fade)
         end
         love.graphics.circle('fill', self.x, self.y, self.size * 20 + self.pulse * 5)
     end
