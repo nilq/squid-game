@@ -4,6 +4,6 @@
 - [ ] Enemies (SUPER DUPER MODULAR!!)
 - [ ] Power-ups
 - [ ] Fishnet
-- [ ] Ink
+- [x] Ink
 - [ ] Scoreboard
 - [ ] Crystals

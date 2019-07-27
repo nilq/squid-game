@@ -7,16 +7,21 @@ function make(x, y)
         life = 0,
         weed_mode = false,
         fade = 1,
-        death = 3,
+        death = 1.75,
+        pulse = 0,
+        a = 0,
     }
 
     function ink:update(i, dt)
         self.life = self.life + dt * self.fade
 
-        if self.life < self.death / 2 then
+        if self.life < self.death / 1.5 then
             self.size = self.size + dt * self.scale
+        else
+            self.a = self.a + dt * 5
+            self.pulse = math.sin(self.a)
         end
-        
+
         if self.life > self.death then
             table.remove(game.objects, i)
         end
@@ -24,11 +29,11 @@ function make(x, y)
 
     function ink:draw()
         if not self.weed_mode then
-            love.graphics.setColor(0, 0, 0, 1 / self.life)
+            love.graphics.setColor(0, 0, 0)
         else
             love.graphics.setColor(math.random(0, 255) / 255, math.random(0, 255) / 255, math.random(0, 255) / 255)
         end
-        love.graphics.circle('fill', self.x, self.y, self.size * 25)
+        love.graphics.circle('fill', self.x, self.y, self.size * 20 + self.pulse * 5)
     end
 
     return ink
