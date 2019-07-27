@@ -7,8 +7,8 @@ function make(x, y)
         dy = 0,
 
         angle = 0,
-        speed = 900,
-        friction = 2.9,
+        speed = 4500,
+        friction = 4.9,
     }
 
     function squid:update(dt)
@@ -37,8 +37,9 @@ function make(x, y)
     end
 
     function squid:press(key)
-        print("ey")
-        table.insert(game.ink, { x = self.x, y = self.y, life = 0 })
+        if key == "space" then
+            table.insert(game.ink, { x = self.x, y = self.y, life = 0 })
+        end
     end
 
     return squid
