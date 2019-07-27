@@ -11,7 +11,11 @@ end
 
 function game.update(dt)
     for i, v in ipairs(game.ink) do
-        v.life = v.life + dt * 5
+        v.life = v.life + dt * 3.5
+
+        if v.life > 5 then
+            table.remove(game.ink, i)
+        end
     end
 
     game.squid:update(dt)

@@ -7,8 +7,8 @@ function make(x, y)
         dy = 0,
 
         angle = 0,
-        speed = 80,
-        friction = 8,
+        speed = 900,
+        friction = 2.9,
     }
 
     function squid:update(dt)
@@ -20,8 +20,6 @@ function make(x, y)
         if love.mouse.isDown(1) and dist > 15 then
             local target_angle = math.atan2(mouse_y - self.y, mouse_x - self.x)
 
-            print(math.cos(target_angle) * self.speed * dt, math.sin(target_angle) * self.speed * dt)
-
             self.dx = self.dx + math.cos(target_angle) * self.speed * dt
             self.dy = self.dy + math.sin(target_angle) * self.speed * dt
         end
@@ -29,8 +27,8 @@ function make(x, y)
         self.dx = math.lerp(self.dx, 0, self.friction * dt)
         self.dy = math.lerp(self.dy, 0, self.friction * dt)
 
-        self.x = self.x + self.dx
-        self.y = self.y + self.dy
+        self.x = self.x + self.dx * dt
+        self.y = self.y + self.dy * dt
     end
 
     function squid:draw()
