@@ -2,12 +2,12 @@ function make(x, y)
     local ink = {
         x = x,
         y = y,
-        size = 0,
-        scale = 2,
+        size = 0.5,
+        scale = 1.5,
         life = 0,
         weed_mode = false,
-        fade = 2,
-        death = 4,
+        fade = 1,
+        death = 3,
     }
 
     function ink:update(i, dt)
