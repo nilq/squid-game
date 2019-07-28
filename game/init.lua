@@ -6,8 +6,8 @@ game = {
     bottom = 550,
     top = 40,
 
-    left = 0,
-    right = 1200 * 1.75,
+    left = 40,
+    right = 1155,
 }
 
 love.graphics.setBackgroundColor(0, 0.85, 0.85)
