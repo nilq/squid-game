@@ -1,5 +1,5 @@
 local highscore = {
-    text = "            GAME OVER\n\n       [SPACE] to restart\n\n\nHighscore:",
+    text = "            GAME OVER\n\n       [ENTER] to restart\n\n\nHighscore:",
     score = 0,
 }
 
@@ -40,7 +40,7 @@ function highscore.draw()
 end
 
 function highscore.press(key)
-    if key == "space" then
+    if key == "enter" then
         love.load()
     end
 end
