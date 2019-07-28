@@ -20,10 +20,16 @@ function game.load()
 
     game.squid = entities.squid.make(100, 100)
     game.camera = camera(0, 0, 2, 2, 0)
+
+    game.spawner.level = 1
+    game.spawner.timer = 0
+
+    game.crystal = entities.crystal.make(600, game.bottom - 35)
 end
 
 function game.update(dt)
     game.spawner:update(dt)
+
     game.squid:update(dt)
 
     for i, v in ipairs(game.ink) do
@@ -43,6 +49,8 @@ function game.draw()
     game.camera:set()
 
     game.squid:draw()
+    game.crystal:draw()
+
 
     for i, v in ipairs(game.objects) do
         if v.draw then

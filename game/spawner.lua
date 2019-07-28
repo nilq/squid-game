@@ -1,6 +1,6 @@
 local spawner = {
     level = 1,
-    hardness = 0.015,
+    hardness = 0.0015,
     timer = 0,
     spawn = 0.5,
 }

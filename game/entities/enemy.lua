@@ -5,11 +5,35 @@ function make(type, x, y)
         x = x,
         y = y,
         speed = 50,
-        sprite = config.sprite
+        sprite = config.sprite,
+        carrying = false,
     }
 
     enemy.update = function(self, i, dt)
-        self.y = self.y + self.speed * dt
+        local target_angle = math.atan2(game.crystal.y - self.y, game.crystal.x - self.x)
+
+        if self.carrying then
+            local width, height = self:get_size()
+
+            game.crystal.x = math.lerp(game.crystal.x, self.x + width / 2 - 15, dt * 100)
+            game.crystal.y = math.lerp(game.crystal.y, self.y + height - 16, dt * 100)
+
+            self.x = self.x + self.speed * 3 * dt
+
+            if self.x > game.right then
+                game.load()
+            end
+        else
+            self.x = self.x + math.cos(target_angle) * self.speed * dt
+            self.y = self.y + math.sin(target_angle) * self.speed * dt
+
+            if math.distance(self.x, self.y, game.crystal.x, game.crystal.y) < 60 then
+                if not game.crystal.carrying then
+                    self.carrying = true
+                    game.crystal.carrying = true
+                end
+            end
+        end
 
         for i, v in ipairs(game.ink) do
             if v == nil then
@@ -23,6 +47,10 @@ function make(type, x, y)
             if dist < v.size then
                 for i, v in ipairs(game.objects) do
                     if v == self then
+                        if self.carrying then
+                            game.crystal.carrying = false
+                        end
+
                         table.remove(game.objects, i)
                     end
                 end
