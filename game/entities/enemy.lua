@@ -1,11 +1,10 @@
 function make(type, x, y)
     local configs = require 'game/entities/enemies'
-    local config   = configs[type]
-
+    local config   = configs[type] 
     local enemy = {
         x = x,
         y = y,
-        speed = 10,
+        speed = 50,
         sprite = config.sprite
     }
 

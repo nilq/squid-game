@@ -2,12 +2,11 @@ game = {
     sprites = {
         squid = love.graphics.newImage("res/squid/squid.png")
     },
-
     bottom = 550,
     top = 40,
-
     left = 40,
     right = 1155,
+    spawner = require 'game/spawner',
 }
 
 love.graphics.setBackgroundColor(0, 0.85, 0.85)
@@ -24,6 +23,7 @@ function game.load()
 end
 
 function game.update(dt)
+    game.spawner:update(dt)
     game.squid:update(dt)
 
     for i, v in ipairs(game.ink) do
