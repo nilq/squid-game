@@ -2,7 +2,11 @@ function make(x, y)
     local net = {
         x = x,
         y = y,
-        speed = 100,
+
+        speed = 50,
+        margin = 10,
+        squid_margin = 10,
+
         sprite = game.sprites.net,
 
         collision_enter = false,
@@ -52,10 +56,10 @@ function make(x, y)
 
     net.colliding = function(self, other)
         local self_width, self_height = self:get_size()
-        local self_rectangle = { x = self.x, y = self.y, width = self_width, height = self_height }
+        local self_rectangle = { x = self.x, y = self.y, width = self_width - self.margin, height = self_height - self.margin }
 
         local other_width, other_height = self.get_size(other)
-        local other_rectangle = { x = other.x, y = other.y, width = other_width, height = other_height}
+        local other_rectangle = { x = other.x, y = other.y, width = other_width - self.squid_margin, height = other_height - self.squid_margin}
 
         return self.check_rectangles_overlap(self_rectangle, other_rectangle)
     end
