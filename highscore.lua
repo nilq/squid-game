@@ -1,5 +1,5 @@
 local highscore = {
-    text = "You fucked up",
+    text = "You fucked up [SPACE]",
     score = 0,
 }
 
@@ -25,7 +25,9 @@ function highscore.draw()
 end
 
 function highscore.press(key)
-
+    if key == "space" then
+        love.load()
+    end
 end
 
 function highscore.release(key)
