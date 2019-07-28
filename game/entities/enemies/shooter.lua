@@ -11,7 +11,7 @@ return {
         self.timer = self.timer + dt
 
         if self.timer > 5 then
-            local n = net.make(self.x, self.y)
+            local n = net.make(self.x - 30, self.y + 30)
 
             table.insert(game.objects, n)
 
