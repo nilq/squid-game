@@ -5,7 +5,6 @@ local ink = require(path .. 'ink')
 local enemy = require(path .. 'enemy')
 local crystal = require(path .. 'crystal')
 
-
 return {
     squid = squid,
     ink = ink,

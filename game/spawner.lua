@@ -16,9 +16,12 @@ function spawner:update(dt)
         self.timer = 0
 
         if math.random(0, 100) < 10 then
-
             for i = 0, math.floor(self.level) do
-                table.insert(game.objects, enemy.make('normal', math.random(50, 1150), 0))
+                if math.random(0, 4) == 0 then
+                    table.insert(game.objects, enemy.make('shooter', math.random(50, 1150), 0))
+                else
+                    table.insert(game.objects, enemy.make('normal', math.random(50, 1150), 0))
+                end
             end
         end
     end
