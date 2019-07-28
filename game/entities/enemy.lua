@@ -44,7 +44,7 @@ function make(type, x, y)
 
             local dist = math.distance(self.x + 55, self.y + 6, v.x, v.y)
 
-            if dist < v.size then
+            if dist < v.size and v.life < v.death then
                 for i, v in ipairs(game.objects) do
                     if v == self then
                         if self.carrying then
