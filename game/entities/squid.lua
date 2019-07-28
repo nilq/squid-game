@@ -65,21 +65,8 @@ function make(x, y)
     end
 
     function squid:press(key)
-        if key == "space" and self.ink_cooldown_timer > self.ink_cooldown then
-            local ink = require 'game/entities/ink'
-
-            table.insert(game.ink, ink.make(self.x + math.cos(self.angle) * self.ink_shoot_distance, self.y + math.sin(self.angle) * self.ink_shoot_distance))
-            
-            game.sounds.ink:stop()
-            game.sounds.ink:setVolume(0.25)
-            game.sounds.ink:setPitch(0.5 + math.random(0, 50) / 100)
-            game.sounds.ink:play()
-
-            self.d = self.d + self.ink_boost
-
-            self.ink_shoot_number_counter = 1 -- already shot the first load
-            self.ink_cooldown_timer = 0
-            self.ink_shoot_interval_timer = 0
+        if key == "space" then
+            self:ink()
         end
 
         if key == "e" then
@@ -124,6 +111,10 @@ function make(x, y)
 
         local friction = self.friction
 
+        if love.mouse.isDown(2) then
+            self:ink()
+        end
+
         if love.mouse.isDown(1) then
             local target_angle = math.atan2(mouse_y - self.y, mouse_x - self.x)
 
@@ -165,6 +156,24 @@ function make(x, y)
         end
     end
 
+    function squid:ink() 
+        if self.ink_cooldown_timer > self.ink_cooldown then
+            local ink = require 'game/entities/ink'
+
+            table.insert(game.ink, ink.make(self.x + math.cos(self.angle) * self.ink_shoot_distance, self.y + math.sin(self.angle) * self.ink_shoot_distance))
+            
+            game.sounds.ink:stop()
+            game.sounds.ink:setVolume(0.25)
+            game.sounds.ink:setPitch(0.5 + math.random(0, 50) / 100)
+            game.sounds.ink:play()
+
+            self.d = self.d + self.ink_boost
+
+            self.ink_shoot_number_counter = 1 -- already shot the first load
+            self.ink_cooldown_timer = 0
+            self.ink_shoot_interval_timer = 0
+        end
+    end
 
     return squid
 end
