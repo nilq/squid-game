@@ -1,7 +1,8 @@
 game = {
     sprites = {
         squid = love.graphics.newImage("res/squid/squid.png"),
-        net = love.graphics.newImage("res/enemies/net.png")
+        net = love.graphics.newImage("res/enemies/net.png"),
+        crystal = love.graphics.newImage("res/crystal.png")
     },
     sounds = {
         ink = love.audio.newSource("res/sound/ink.mp3", "static")
@@ -28,7 +29,7 @@ function game.load()
     game.spawner.level = 1
     game.spawner.timer = 0
 
-    game.crystal = entities.crystal.make(600, game.bottom - 35)
+    game.crystal = entities.crystal.make(100, game.bottom - 35)
 end
 
 function game.update(dt)
@@ -47,6 +48,8 @@ function game.update(dt)
             v:update(i, dt)
         end
     end
+
+    game.crystal:update(dt)
 end
 
 function game.draw()
