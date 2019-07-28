@@ -2,6 +2,10 @@ function math.lerp(a, b, t)
     return a + (b - a) * t
 end
 
+function math.clamp(low, n, high)
+  return math.min(math.max(low, n), high)
+end
+
 function math.lerp_angle(a, b, t)
     local pi = math.pi
     if (math.abs(a - b) > pi) then

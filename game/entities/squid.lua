@@ -20,6 +20,7 @@ function make(x, y)
     }
 
     function squid:update(dt)
+        print(self.x, self.y)
         self.fixed_angle = math.lerp_angle(self.fixed_angle, self.angle, dt * 50)
 
         self:movement_type_b(dt)
@@ -28,6 +29,12 @@ function make(x, y)
 
         game.camera.x = math.lerp(game.camera.x, self.x, dt * camera_speed)
         game.camera.y = math.lerp(game.camera.y, self.y, dt * camera_speed)
+
+        game.camera.x = math.clamp(game.left, game.camera.x, game.right)
+        game.camera.y = math.clamp(game.top, game.camera.y, game.bottom)
+
+        self.x = math.clamp(game.left, self.x, game.right)
+        self.y = math.clamp(game.top, self.y, game.bottom)
     end
 
     function squid:draw()

@@ -1,7 +1,13 @@
 game = {
     sprites = {
         squid = love.graphics.newImage("res/squid/squid.png")
-    }
+    },
+
+    bottom = 550,
+    top = 40,
+
+    left = 0,
+    right = 1200 * 1.75,
 }
 
 love.graphics.setBackgroundColor(0, 0.85, 0.85)
@@ -56,6 +62,9 @@ function game.draw()
     local mouse_y = (love.mouse.getY() * game.camera.sy + game.camera.y)
 
     love.graphics.circle('fill', mouse_x, mouse_y, 2)
+
+    love.graphics.setColor(1, 1, 0)
+    love.graphics.rectangle('fill', 0, game.bottom, 1200, 200)
 
     game.camera:unset()
 end
