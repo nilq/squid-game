@@ -21,12 +21,21 @@ function make(x, y)
         ink_shoot_distance = -24,
 
         ink_boost = 200,
+        ink_shoot_number = 3,
+        ink_shoot_interval = 0.05,
+        ink_cooldown = 1,
+
+        ink_shoot_number_counter = 999999,
+        ink_shoot_interval_timer = 0,
+        ink_cooldown_timer = 0,
     }
 
     function squid:update(dt)
         self.fixed_angle = math.lerp_angle(self.fixed_angle, self.angle, dt * 50)
 
         self:movement_type_b(dt)
+
+        self:ink_tick(dt)
 
         local camera_speed = 100
 
@@ -53,13 +62,15 @@ function make(x, y)
     end
 
     function squid:press(key)
-        if key == "space" then
+        if key == "space" and self.ink_cooldown_timer > self.ink_cooldown then
             local ink = require 'game/entities/ink'
             table.insert(game.ink, ink.make(self.x + math.cos(self.angle) * self.ink_shoot_distance, self.y + math.sin(self.angle) * self.ink_shoot_distance))
 
             self.d = self.d + self.ink_boost
 
-            print(math.cos(self.angle) * self.ink_boost)
+            self.ink_shoot_number_counter = 1 -- already shot the first load
+            self.ink_cooldown_timer = 0
+            self.ink_shoot_interval_timer = 0
         end
 
         if key == "e" then
@@ -122,6 +133,23 @@ function make(x, y)
 
         self.x = self.x + math.cos(self.angle) * self.d * dt
         self.y = self.y + math.sin(self.angle) * self.d * dt
+    end
+
+    function squid:ink_tick(dt)
+        self.ink_cooldown_timer = self.ink_cooldown_timer + dt
+        self.ink_shoot_interval_timer = self.ink_shoot_interval_timer + dt
+
+        if self.ink_shoot_number_counter <= self.ink_shoot_number then  -- First ink shoot happens right when space is pressed.
+            if self.ink_shoot_interval_timer > self.ink_shoot_interval then
+
+                local ink = require 'game/entities/ink'
+                table.insert(game.ink, ink.make(self.x + math.cos(self.angle) * self.ink_shoot_distance, self.y + math.sin(self.angle) * self.ink_shoot_distance))
+
+                self.ink_shoot_interval_timer = 0
+
+                self.ink_shoot_number_counter = self.ink_shoot_number_counter + 1
+            end
+        end
     end
 
 
