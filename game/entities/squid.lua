@@ -64,7 +64,13 @@ function make(x, y)
     function squid:press(key)
         if key == "space" and self.ink_cooldown_timer > self.ink_cooldown then
             local ink = require 'game/entities/ink'
+
             table.insert(game.ink, ink.make(self.x + math.cos(self.angle) * self.ink_shoot_distance, self.y + math.sin(self.angle) * self.ink_shoot_distance))
+            
+            game.sounds.ink:stop()
+            game.sounds.ink:setVolume(0.25)
+            game.sounds.ink:setPitch(0.5 + math.random(0, 50) / 100)
+            game.sounds.ink:play()
 
             self.d = self.d + self.ink_boost
 

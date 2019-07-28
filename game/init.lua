@@ -2,6 +2,9 @@ game = {
     sprites = {
         squid = love.graphics.newImage("res/squid/squid.png")
     },
+    sounds = {
+        ink = love.audio.newSource("res/sound/ink.mp3", "static")
+    },
     bottom = 550,
     top = 40,
     left = 40,

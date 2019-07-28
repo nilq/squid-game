@@ -4,12 +4,16 @@ function make(type, x, y)
     local enemy = {
         x = x,
         y = y,
-        speed = 50,
+        speed = config.speed,
         sprite = config.sprite,
         carrying = false,
     }
 
     enemy.update = function(self, i, dt)
+        if config.update then
+            config.update(self)
+        end
+
         local target_angle = math.atan2(game.crystal.y - self.y, game.crystal.x - self.x)
 
         if self.carrying then
