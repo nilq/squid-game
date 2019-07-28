@@ -27,8 +27,8 @@ function make(type, x, y)
         if self.carrying and not self.falling then
             local width, height = self:get_size()
 
-            game.crystal.x = math.lerp(game.crystal.x, self.x, dt * 100)
-            game.crystal.y = math.lerp(game.crystal.y, self.y + height / 2 - 16, dt * 100)
+            game.crystal.x = math.lerp(game.crystal.x, self.x -10, dt * 100)
+            game.crystal.y = math.lerp(game.crystal.y, self.y -8 + height / 2 - 16, dt * 100)
 
             self.x = self.x + self.speed * 3 * dt
 
