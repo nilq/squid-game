@@ -19,9 +19,9 @@ function make(type, x, y)
 
             local width, height = self:get_size()
 
-            local dist = math.distance(self.x + width / 2, self.y + height / 2, v.x, v.y)
+            local dist = math.distance(self.x + 55, self.y + 6, v.x, v.y)
 
-            if dist < 25 then
+            if dist < v.size then
                 for i, v in ipairs(game.objects) do
                     if v == self then
                         table.remove(game.objects, i)
