@@ -17,9 +17,9 @@ game = {
     score = 0,
 }
 
-love.graphics.setBackgroundColor(0, 0.85, 0.85)
-
 function game.load()
+    love.graphics.setBackgroundColor(0, 0.85, 0.85)
+
     game.objects = {}
     game.ink = {}
     game.ocean_floor = {}

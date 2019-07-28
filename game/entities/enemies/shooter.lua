@@ -4,6 +4,10 @@ return {
     speed  = 10,
     sprite = love.graphics.newImage("res/enemies/shooter.png"),
     update = function(self, dt)
+        if self.falling then
+            return
+        end
+
         self.timer = self.timer + dt
 
         if self.timer > 5 then
