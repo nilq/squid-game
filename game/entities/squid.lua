@@ -18,16 +18,16 @@ function make(x, y)
         mouse_break_distance = 40,
         breaking_friction = 6,
 
-        ink_shoot_distance = -24,
+        ink_shoot_distance = -10,
 
         ink_boost = 200,
         ink_shoot_number = 3,
-        ink_shoot_interval = 0.05,
+        ink_shoot_interval = 0.03,
         ink_cooldown = 1,
 
-        ink_shoot_number_counter = 999999,
-        ink_shoot_interval_timer = 0,
-        ink_cooldown_timer = 0,
+        ink_shoot_number_counter = 999,
+        ink_shoot_interval_timer = 999,
+        ink_cooldown_timer = 999,
     }
 
     function squid:update(dt)
@@ -139,7 +139,7 @@ function make(x, y)
         self.ink_cooldown_timer = self.ink_cooldown_timer + dt
         self.ink_shoot_interval_timer = self.ink_shoot_interval_timer + dt
 
-        if self.ink_shoot_number_counter <= self.ink_shoot_number then  -- First ink shoot happens right when space is pressed.
+        if self.ink_shoot_number_counter < self.ink_shoot_number then  -- First ink shoot happens right when space is pressed.
             if self.ink_shoot_interval_timer > self.ink_shoot_interval then
 
                 local ink = require 'game/entities/ink'
