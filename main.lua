@@ -42,14 +42,14 @@ love.graphics.setDefaultFilter("nearest", "nearest") -- before game
 
 local game = require 'game/'
 
-function love.load(dead)
+function love.load(dead, score)
   if dead == true then
     game = require 'highscore'
+    game.load(score)
   else
     game = require 'game/'
+    game.load()
   end
-
-  game.load()
 end
 
 function love.update(dt)

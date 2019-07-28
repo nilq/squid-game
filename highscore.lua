@@ -1,12 +1,26 @@
 local highscore = {
-    text = "You fucked up [SPACE]",
+    text = "            GAME OVER\n\n       [SPACE] to restart\n\n\nHighscore:",
     score = 0,
 }
 
-function highscore.load()
-    highscore.score = love.filesystem.load("highscore.dat")()
+function highscore.load(score)
+    
+    local data = love.filesystem.load("highscore.dat")()
+    
+    table.insert(data, score)
 
-    highscore.text = highscore.text .. '\n' .. highscore.score.score .. ' seconds'
+    table.sort(data, scoreCompare)
+
+    love.filesystem.write("highscore.dat", serialize(data))
+
+    for i, s in ipairs(data) do
+        if(s == score)then
+            highscore.text = highscore.text .. '\n' .. math.floor(s) .. ' seconds   (you)'
+        else
+        highscore.text = highscore.text .. '\n' .. math.floor(s) .. ' seconds'
+        end
+        print (data)
+    end
 end
 
 function highscore.update(dt)
@@ -15,6 +29,7 @@ end
 
 function highscore.draw()
     love.graphics.setBackgroundColor(1, 0.2, 0.2)
+    love.graphics.setColor(1, 1, 1)
 
     love.graphics.scale(2, 2)
     love.graphics.print(
@@ -32,6 +47,10 @@ end
 
 function highscore.release(key)
 
+end
+
+function scoreCompare(a, b)
+    return a > b
 end
 
 return highscore

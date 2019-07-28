@@ -33,13 +33,7 @@ function make(type, x, y)
             self.x = self.x + self.speed * 3 * dt
 
             if self.x > game.right then
-                local data = {
-                    score = game.score
-                }
-
-                love.filesystem.write("highscore.dat", serialize(data))
-
-                love.load(true)
+                love.load(true, game.score)
             end
         else
             if not self.falling then
