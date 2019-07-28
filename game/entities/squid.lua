@@ -1,5 +1,7 @@
 function make(x, y)
     local squid = {
+        sprite = game.sprites.squid,
+
         x = x,
         y = y,
 
@@ -10,13 +12,13 @@ function make(x, y)
         angle = 0,
         fixed_angle = 0, -- for nicer sprite
         
-        acceleration = 1500,
+        acceleration = 750,
         friction = 3,
 
         mouse_break_distance = 40,
         breaking_friction = 6,
 
-        sprite = game.sprites.squid,
+        ink_shoot_distance = -24,
     }
 
     function squid:update(dt)
@@ -52,7 +54,7 @@ function make(x, y)
     function squid:press(key)
         if key == "space" then
             local ink = require 'game/entities/ink'
-            table.insert(game.ink, ink.make(self.x, self.y))
+            table.insert(game.ink, ink.make(self.x + math.cos(self.angle) * self.ink_shoot_distance, self.y + math.sin(self.angle) * self.ink_shoot_distance))
         end
 
         if key == "e" then
