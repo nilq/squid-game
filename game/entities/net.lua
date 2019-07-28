@@ -17,11 +17,18 @@ function make(x, y)
 
         if self.collision_enter then
             game.squid.caught_in_net = game.squid.caught_in_net + 1
-            print(game.squid.caught_in_net)
         end
 
         if self.collision_exit then
             game.squid.caught_in_net = game.squid.caught_in_net - 1
+        end
+        
+        if self.y > 700 then
+            for i, v in ipairs(game.objects) do
+                if v == self then
+                    table.remove(game.objects, i)
+                end
+            end
         end
     end
 
