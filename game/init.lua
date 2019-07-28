@@ -64,7 +64,7 @@ function game.draw()
     love.graphics.circle('fill', mouse_x, mouse_y, 2)
 
     love.graphics.setColor(1, 1, 0)
-    love.graphics.rectangle('fill', 0, game.bottom, 1200, 200)
+    love.graphics.rectangle('fill', 0, game.bottom, game.camera.x + 1200, 200)
 
     game.camera:unset()
 end

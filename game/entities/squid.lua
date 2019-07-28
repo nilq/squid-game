@@ -19,10 +19,11 @@ function make(x, y)
         breaking_friction = 6,
 
         ink_shoot_distance = -24,
+
+        ink_boost = 200,
     }
 
     function squid:update(dt)
-        print(self.x, self.y)
         self.fixed_angle = math.lerp_angle(self.fixed_angle, self.angle, dt * 50)
 
         self:movement_type_b(dt)
@@ -55,6 +56,10 @@ function make(x, y)
         if key == "space" then
             local ink = require 'game/entities/ink'
             table.insert(game.ink, ink.make(self.x + math.cos(self.angle) * self.ink_shoot_distance, self.y + math.sin(self.angle) * self.ink_shoot_distance))
+
+            self.d = self.d + self.ink_boost
+
+            print(math.cos(self.angle) * self.ink_boost)
         end
 
         if key == "e" then
