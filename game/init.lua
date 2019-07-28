@@ -74,7 +74,6 @@ function game.draw()
     love.graphics.rectangle('fill', 0, game.bottom, game.camera.x + 1200, 200)
 
     game.crystal:draw()
-    game.squid:draw()
 
 
     for i, v in ipairs(game.objects) do
@@ -88,6 +87,7 @@ function game.draw()
             v:draw()
         end
     end
+    game.squid:draw()
 
     love.graphics.setColor(1, 0, 0)
 
