@@ -1,3 +1,5 @@
+serialize = require 'ser'
+
 function math.lerp(a, b, t)
     return a + (b - a) * t
 end
@@ -37,10 +39,15 @@ end
 
 
 love.graphics.setDefaultFilter("nearest", "nearest") -- before game
+
 local game = require 'game/'
 
-function love.load()
-    game.load()
+function love.load(dead)
+  if dead == true then
+    game = require 'highscore'
+  end
+
+  game.load()
 end
 
 function love.update(dt)

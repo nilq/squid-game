@@ -14,6 +14,7 @@ game = {
     left = 40,
     right = 1155,
     spawner = require 'game/spawner',
+    score = 0,
 }
 
 love.graphics.setBackgroundColor(0, 0.85, 0.85)
@@ -44,8 +45,9 @@ function game.load()
 end
 
 function game.update(dt)
-    game.spawner:update(dt)
+    game.score = game.score + dt
 
+    game.spawner:update(dt)
     game.squid:update(dt)
 
     for i, v in ipairs(game.ink) do
@@ -103,7 +105,6 @@ function game.press(key)
     game.squid:press(key)
 end
 
-function game.release(key)
-end
+function game.release(key) end
 
 return game

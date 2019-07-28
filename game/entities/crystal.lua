@@ -7,9 +7,9 @@ function make(x, y)
         sprite = game.sprites.crystal,
     }
 
-    crystal.update = function(self, dt)
-        if not self.carrying and self.y > self.default_y then
-            self.y = self.default_y
+    function crystal:update(dt)
+        if not self.carrying and self.y < self.default_y then
+            self.y = self.y + dt * 50
         end
     end
 

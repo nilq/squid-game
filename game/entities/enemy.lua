@@ -33,7 +33,13 @@ function make(type, x, y)
             self.x = self.x + self.speed * 3 * dt
 
             if self.x > game.right then
-                game.load()
+                local data = {
+                    score = game.score
+                }
+
+                love.filesystem.write("highscore.dat", serialize(data))
+
+                love.load(true)
             end
         else
             if not self.falling then
@@ -68,6 +74,9 @@ function make(type, x, y)
 
             if dist < v.size and v.life < v.death then
                 self.falling = true
+                if self.carrying then
+                    game.crystal.carrying = false
+                end
                 self.sprite = config.dead_sprite or self.sprite
             end
 
