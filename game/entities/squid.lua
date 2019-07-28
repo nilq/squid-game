@@ -28,6 +28,9 @@ function make(x, y)
         ink_shoot_number_counter = 999,
         ink_shoot_interval_timer = 999,
         ink_cooldown_timer = 999,
+
+        caught_in_net = 0, -- number of nets the squid is caught in
+        net_friction = 12,
     }
 
     function squid:update(dt)
@@ -80,10 +83,10 @@ function make(x, y)
         end
 
         if key == "e" then
-            local enemy = (require 'game/entities/').enemy
-            local e = enemy.make('normal', self.x, self.y)
+            local net = (require 'game/entities/net')
+            local n = net.make(self.x, self.y)
 
-            table.insert(game.objects, e)
+            table.insert(game.objects, n)
         end
     end
 
@@ -133,6 +136,10 @@ function make(x, y)
             else
                 self.d = 0
             end
+        end
+
+        if self.caught_in_net > 0 then
+            friction = self.net_friction
         end
 
         self.d = math.lerp(self.d, 0, friction * dt)

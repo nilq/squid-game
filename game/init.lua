@@ -1,6 +1,7 @@
 game = {
     sprites = {
-        squid = love.graphics.newImage("res/squid/squid.png")
+        squid = love.graphics.newImage("res/squid/squid.png"),
+        net = love.graphics.newImage("res/enemies/net.png")
     },
     sounds = {
         ink = love.audio.newSource("res/sound/ink.mp3", "static")
