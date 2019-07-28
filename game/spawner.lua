@@ -1,6 +1,6 @@
 local spawner = {
-    level = 1,
-    hardness = 0.0015,
+    level = 3,
+    hardness = 0.0025,
     timer = 0,
     spawn = 0.5,
 }
@@ -15,9 +15,9 @@ function spawner:update(dt)
     if self.timer > self.spawn then
         self.timer = 0
 
-        if math.random(0, 100) < 10 then
+        if math.random(0, 15) == 0 then
             for i = 0, math.floor(self.level) do
-                if math.random(0, 4) == 0 then
+                if math.random(0, 1) == 0 then
                     table.insert(game.objects, enemy.make('shooter', math.random(50, 1150), 0))
                 else
                     table.insert(game.objects, enemy.make('normal', math.random(50, 1150), 0))

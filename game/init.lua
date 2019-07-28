@@ -33,7 +33,9 @@ function game.load()
     game.spawner.level = 1
     game.spawner.timer = 0
 
-    game.crystal = entities.crystal.make(100, game.bottom - 35)
+    game.crystal = entities.crystal.make(300, game.bottom - 35)
+
+    table.insert(game.objects, entities.enemy.make('normal', 200, 100))
 
     for i = 0, 25 do
         table.insert(game.ocean_floor, entities.starfish.make(math.random(game.left, game.right), game.bottom + math.random(-0, 50)))
