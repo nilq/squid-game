@@ -30,7 +30,7 @@ function make(x, y)
         ink_cooldown_timer = 999,
 
         caught_in_net = 0, -- number of nets the squid is caught in
-        net_friction = 12,
+        net_friction = 50,
     }
 
     function squid:update(dt)
