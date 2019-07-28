@@ -5,7 +5,7 @@ game = {
         crystal = love.graphics.newImage("res/crystal.png")
     },
     sounds = {
-        ink = love.audio.newSource("res/sound/ink.mp3", "static")
+        ink = love.audio.newSource("res/sound/ink3.mp3", "static")
     },
     bottom = 550,
     top = 40,
