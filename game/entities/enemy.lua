@@ -24,7 +24,7 @@ function make(type, x, y)
             config.update(self, dt)
         end
 
-        if self.carrying then
+        if self.carrying and not self.falling then
             local width, height = self:get_size()
 
             game.crystal.x = math.lerp(game.crystal.x, self.x, dt * 100)
@@ -74,18 +74,17 @@ function make(type, x, y)
             if self.falling then
                 self.wiggle_time = self.wiggle_time + dt * 2
 
-                if self.y < game.bottom + self.sprite:getHeight() / 2  then
+                if self.y < game.bottom - self.sprite:getHeight() / 6 then
                     self.y = self.y + self.speed * dt
+                    self.angle = math.lerp(self.angle, self.target_wiggle, dt * 50)
                 end
-
-                self.angle = math.lerp(self.angle, self.target_wiggle, dt * 50)
 
                 if self.wiggle_time > 0.2 then
                     self.target_wiggle = math.random(-90, 100) / 360
                 end
             end
 
-            if self.y > game.bottom + self.sprite:getHeight() / 2 and self.falling then
+            if not (self.y < game.bottom - self.sprite:getHeight() / 6) and self.falling then
                 self.corpse_timer = self.corpse_timer + dt
 
                 if self.corpse_timer > self.corpse_remove then
