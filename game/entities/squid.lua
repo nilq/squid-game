@@ -8,21 +8,38 @@ function make(x, y)
         d = 0,
 
         angle = 0,
+        fixed_angle = 0, -- for nicer sprite
         
         acceleration = 1500,
         friction = 3,
 
         mouse_break_distance = 40,
-        breaking_friction = 6
+        breaking_friction = 6,
+
+        sprite = game.sprites.squid,
     }
 
     function squid:update(dt)
+        self.fixed_angle = math.lerp_angle(self.fixed_angle, self.angle, dt * 50)
+
         self:movement_type_b(dt)
+
+        local camera_speed = 100
+
+        game.camera.x = math.lerp(game.camera.x, self.x, dt * camera_speed)
+        game.camera.y = math.lerp(game.camera.y, self.y, dt * camera_speed)
     end
 
     function squid:draw()
-        love.graphics.setColor(0, 0, 1)
-        love.graphics.circle('fill', self.x, self.y, 15)
+        love.graphics.setColor(1, 1, 1)
+
+        local width, height = self:get_size()
+
+        love.graphics.draw(self.sprite, self.x, self.y, self.fixed_angle + math.pi / 2, 1, 1, width / 2, height / 2)
+    end
+
+    function squid:get_size()
+        return self.sprite:getWidth(), self.sprite:getHeight()
     end
 
     function squid:press(key)
@@ -40,8 +57,8 @@ function make(x, y)
     end
 
     function squid:movement_type_a(dt)
-        local mouse_x = love.mouse.getX()
-        local mouse_y = love.mouse.getY()
+        local mouse_x = (love.mouse.getX() * game.camera.sx + game.camera.x)
+        local mouse_y = (love.mouse.getY() * game.camera.sy + game.camera.y)
 
         local dist = math.distance(self.x, self.y, mouse_x, mouse_y)
 

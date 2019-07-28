@@ -6,6 +6,7 @@ function make(type, x, y)
         x = x,
         y = y,
         speed = 10,
+        sprite = config.sprite
     }
 
     enemy.update = function(self, i, dt)
@@ -13,11 +14,12 @@ function make(type, x, y)
 
         for i, v in ipairs(game.ink) do
             if v == nil then
-                print("heskjd")
                 goto continue
             end
 
-            local dist = math.distance(self.x + 50, self.y + 25, v.x, v.y)
+            local width, height = self:get_size()
+
+            local dist = math.distance(self.x + width / 2, self.y + height / 2, v.x, v.y)
 
             if dist < 25 then
                 for i, v in ipairs(game.objects) do
@@ -32,8 +34,12 @@ function make(type, x, y)
     end
 
     enemy.draw = function(self)
-        love.graphics.setColor(0.8, 0.1, 0.1)
-        love.graphics.rectangle('fill', self.x, self.y, 100, 50)
+        love.graphics.setColor(1, 1, 1)
+        love.graphics.draw(self.sprite, self.x, self.y, 0, 1, 1)
+    end
+
+    enemy.get_size = function(self)
+        return self.sprite:getWidth(), self.sprite:getHeight()
     end
 
     return enemy
